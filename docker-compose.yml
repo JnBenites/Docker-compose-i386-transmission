@@ -1,20 +1,18 @@
-version: "2.1"
+version: "3"
 services:
   transmission:
-    image: gists/transmission:3.00
     container_name: transmission
+    image: jaymoulin/transmission
     environment:
       - PUID=1000
-      - PGID=1000
+      - PGID=1001
       - TZ=America/Guayaquil
-      - USERNAME=username
-      - PASSWORD=password
-    volumes:
-      - <path to data>:/config/config
-      - <path to downloads>:/downloads/downloads
-      - <path to watch folder>:/watch/watch
+      #- USERNAME=username
+      #- PASSWORD=password
+# default username and password "" ""
     ports:
-      - 80:9091
-      - 51413:51413
-      - 51413:51413/udp
-    restart: always
+      - 9091:9091
+    restart: unless-stopped
+    volumes:
+      - <path to config>:/config
+      - <path to downloads>:/output
